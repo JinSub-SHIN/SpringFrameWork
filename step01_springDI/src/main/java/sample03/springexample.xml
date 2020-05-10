@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="sample03.BookVo" id="bv">
+		<constructor-arg>
+			<value>도서</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>진섭</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>300000</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>2020-05-08</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean class="sample03.BookDAOImpl" id="impl">		
+	</bean>
+	
+	<bean class="sample03.BookController" id="bc">
+		<constructor-arg ref="impl"/>
+		<constructor-arg ref="bv"/>
+	</bean>
+	
+
+
+</beans>
