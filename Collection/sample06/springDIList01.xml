@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!-- 외부 properties 파일 로딩하기... -->
+
+<!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:sample06/coustomerInfo.properties</value>
+		</property>
+	</bean> -->
+		
+	<!-- 외부 properties 파일 여러개 로딩하기... -->
+	
+<!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>classpath:sample06/coustomerInfo.properties</value>
+				<value>classpath:sample06/coustomerInfo2.properties</value>
+			</array>
+		</property>
+	</bean> -->
+	
+	
+	<!-- context는 필요한 객체들을 자동으로 생성해 준다.... -->
+	<!-- 위의 bean 객체 PropertyPlaceholderConfigurer 를 대신 생성해서 setXxx()호출해주는 context설정... -->
+	
+	<context:property-placeholder location="classpath:sample06/coustomerInfo.properties,classpath:sample06/customerInfo2.properties"/>
+
+	<!-- Customer 객체를 생성... -->
+	
+	<bean class="sample06.Customer" id="cu1">
+		<constructor-arg value="jang"></constructor-arg>	
+	</bean>
+	
+	<bean class="sample06.Customer" id="cu2">
+		<property name="addr" value="판교"></property>
+	</bean>
+	
+	<bean class="sample06.Customer" id="cu3">
+		<constructor-arg value="hoho"></constructor-arg>
+		<property name="age" value="50"></property>
+		<property name="addr" value="서울"></property>
+	</bean>
+	
+	<bean class="sample06.Customer" id="cu4">
+		<property name="id" value="${id}"></property> <!-- ${key}는 외부 properties파일 사용.. -->
+		<property name="age" value="${age}"></property>
+		<property name="addr" value="${addr}"></property>
+	</bean>
+	
+	<bean class="sample06.Customer" id="cu5">
+		<constructor-arg value="${user.id}"></constructor-arg>
+		<property name="age" value="${user.age}"></property>
+		<property name="addr" value="${user.addr}"></property>
+	</bean>
+
+</beans>
