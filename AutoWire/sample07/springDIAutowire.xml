@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="sample07.Member" id="member">
+		<property name="name" value="희정"></property>
+		<property name="age" value="20"></property>
+		<property name="addr" value="청담동"></property>
+	</bean>
+	
+	
+	<bean class="sample07.Member" id="m2">
+		<property name="name" value="희정2"></property>
+		<property name="age" value="202"></property>
+		<property name="addr" value="청담동2"></property>
+	</bean>
+
+	<!-- autowire 속성...
+		1. byType ==> setter를 자동으로 호출한다..
+					  type이 같은 객체를 찾아서 자동으로 주입(호출)...
+					  동일한 type이 여러개 생성되어 있으면 오류 발생
+					  이런경우 byName을 사용하여야 한다.
+					  byType은 반드시 동일한 객체 한개만 존재할때 사용가능하다.
+					  
+		2. byName ==> setter를 자동으로 호출한다..
+					  xml의 id와 java문서의 property 이름이 동일한 객체를 찾는다.
+					  못찾으면 오류없고 주입안된다..
+					  
+		3. constructor : 생성자를 호출한다.
+						 처음에 byType으로 찾고 안되면 byName으로 찾는다.
+						 여기에 byName은 xml의 id와 java의 생성자매개변수의 이름과 동일해야 주입된다.
+					  
+	 -->
+	 
+<!-- 	<bean class="sample07.MemberController" id="controller" autowire="byName">	 -->
+<!-- 	</bean> -->
+
+		<bean class="sample07.MemberController" id="controller" autowire="constructor"></bean>
+
+</beans>

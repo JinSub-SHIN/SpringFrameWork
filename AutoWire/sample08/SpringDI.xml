@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="sample08.BookDTO" id="dto1">
+		<property name="subject" value="하하"></property>
+		<property name="writer" value="진섭"></property>
+		<property name="price" value="3000"></property>
+		<property name="date" value="2020-05-11"></property>
+	</bean>
+			
+	<bean class="sample08.BookDTO" id="dto2">
+		<property name="subject" value="하하2"></property>
+		<property name="writer" value="진섭2"></property>
+		<property name="price" value="30002"></property>
+		<property name="date" value="2020-05-12"></property>
+	</bean>
+	
+	<!-- p를 사용하는 방법... -->
+	
+	<bean class="sample08.BookDTO" id="dto3" p:subject="jQuery" p:writer="누구" p:price="50000" p:date="오늘">
+	
+	</bean>
+	
+	<bean class="sample08.MessageSender" id="msender"></bean>
+	
+	<bean class="sample08.EmailSender" id="esender"></bean>
+	
+	<bean class="sample08.DbUtil" id="util"></bean>
+	
+	<bean class="sample08.BookDAOImpl" id="dao" autowire="constructor"></bean>
+	
+	<bean class="sample08.BookServiceImpl" id="service" autowire="byType">
+		<constructor-arg ref="dao"></constructor-arg>
+	</bean>
+	
+	<bean class="sample08.BookController" id="controller" autowire="constructor"></bean>
+	
+	
+		
+
+
+</beans>
