@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 객체 생성 -->
+	
+	<bean class="kosta.mvc.domain.BoardDTO" id="board1">
+		<property name="no" value="1"></property>
+		<property name="title" value="안녕하세요"></property>
+		<property name="detail" value="세부정보입니다"></property>
+		<property name="date" value="2020-05-14"></property>
+		<property name="name" value="신진섭"></property>
+	</bean>
+	
+	<bean class="kosta.mvc.domain.BoardDTO" id="board2">
+		<property name="no" value="2"></property>
+		<property name="title" value="호잇호잇"></property>
+		<property name="detail" value="세부정보입니다"></property>
+		<property name="date" value="2020-05-14"></property>
+		<property name="name" value="장희정"></property>
+	</bean>
+	
+	<bean class="kosta.mvc.domain.BoardDTO" id="board3">
+		<property name="no" value="3"></property>
+		<property name="title" value="이런..."></property>
+		<property name="detail" value="세부정보입니다"></property>
+		<property name="date" value="2020-05-14"></property>
+		<property name="name" value="누구게"></property>
+	</bean>
+	
+
+</beans>
