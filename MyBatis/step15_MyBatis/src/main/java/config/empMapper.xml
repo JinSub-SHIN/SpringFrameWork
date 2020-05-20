@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+	<!-- 검색 -->
+	<select id="selectByName" resultType="String">
+		SELECT FIRST_NAME FROM EMPLOYEES
+	</select>
+
+	<!-- 등록 -->
+	<insert id="empInsert" parameterType="employees">
+	insert into employees(employee_id, last_name, email, hire_date, job_id, salary, phone_number)
+	    values(#{employeeId}, #{lastName}, #{email}, sysdate, 'AD_VP', #{salary}, #{phoneNumber})
+	</insert>
+
+	<!-- 삭제 -->
+	<delete id="empDelete" parameterType="int">
+		DELETE FROM EMPLOYEES where EMPLOYEE_ID=#{_parameter}
+	</delete>
+
+	<!-- 업데이트 -->
+	<update id="empUpdate" parameterType="employees">
+		UPDATE EMPLOYEES SET LAST_NAME=#${lastName}, email=#{email}, hire_date=sysdate, salary=#{salary} WHERE employee_id=#{employeeId}
+	</update>
+	
+	
+	<!-- 검색 필드와 검색 단어에 해당하는 것으로 찾기.. -->
+	<!-- 다른 Mapper 에 있는 id 를 참조하고 싶을 경우.. -->
+	<select id="selectByKeyField" parameterType="map" resultType="employees">
+		<include refid="empSelect.empSql"></include> WHERE lower(${keyField}) like lower(#{keyWord})
+	</select>
+	
+	
+
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="empSelect">
+
+	<!-- 전체 검색 -->
+	
+<!-- 	<select id="selectAll" resultType="employees"> -->
+<!-- 		SELECT employee_id, last_name, email, hire_date, job_id, salary FROM EMPLOYEES -->
+<!-- 	</select> -->
+
+	<!-- 검색된 컬럼명과 자바 property 매칭하기 -->
+	<resultMap type="employees" id="empSelectMap">
+		<id column="employee_id" property="employeeId"></id>
+		<result column="last_name" property="lastName"></result>
+		<result column="email" property="email"></result>
+		<result column="job_id" property="jobId"></result>
+		<result column="hire_date" property="hireDate"></result>
+		<result column="salary" property="salary"></result>
+	</resultMap>
+	
+	<!-- 자주 사용되는 반복코드를 sql로 만들어 놓고 include하여 사용한다. -->
+	
+	<sql id="empSql">
+		SELECT employee_id, last_name, email, hire_date, job_id, salary FROM EMPLOYEES
+	</sql>
+	
+<!-- 	<select id="selectAll" resultMap="empSelectMap"> -->
+<!-- 		SELECT employee_id, last_name, email, hire_date, job_id, salary FROM EMPLOYEES -->
+<!-- 	</select> -->
+
+	<select id="selectAll" resultType="employees">
+	<include refid="empSql"></include>
+	</select>
+
+	<select id="selectByEmpId" parameterType="int" resultType="employees">
+	 <include refid="empSql"></include>
+	 WHERE employee_id=#{_parameter}
+	</select>
+	
+	<!-- #{이름} : PreparedStatement 형식
+		 ${이름} : Statement형식 ( 값이 그대로 연결되어 매핑 ) => 사용할때 고민해서 사용하자.
+	 -->
+	
+	<!-- 정렬 대상을 전달받아 정렬하기 -->
+	<select id="selectByOrder" parameterType="String" resultType="employees">
+	<include refid="empSql"></include> order by ${_parameter}
+	
+	</select>
+
+	<select id="selectWhereSalary" parameterType="int" resultType="employees">
+	<include refid="empSql"></include> WHERE SALARY &lt; #{_parameter} ORDER BY SALARY DESC
+	</select>
+	
+	<!-- 임금이 최소 ~ 최대 사이 검색하기 -->
+	
+	<select id="selectByMinMax" parameterType="map" resultType="employees">
+	<include refid="empSql"></include> WHERE SALARY between #{min} AND #{max} ORDER BY SALARY DESC
+	</select>
+
+
+</mapper>
