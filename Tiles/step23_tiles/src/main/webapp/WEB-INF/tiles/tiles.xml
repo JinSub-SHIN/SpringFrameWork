@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<tiles-definitions>
+	<definition name="layout"
+		template="/WEB-INF/tiles/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/tiles/top.jsp"></put-attribute>
+		<put-attribute name="footer"
+			value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="boardLayout"
+		template="/WEB-INF/tiles/boardLayout.jsp">
+		<put-attribute name="top" value="/WEB-INF/tiles/top.jsp"></put-attribute>
+		<put-attribute name="aside" value="/WEB-INF/tiles/aside.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+	</definition>
+	
+	
+	<definition name="freeBoardLayout" template="/WEB-INF/tiles/freeBoardLayout.jsp">
+		<put-attribute name="top" value="/WEB-INF/tiles/top.jsp"></put-attribute>
+	</definition>
+	
+	
+
+	<!-- @Controller 에서 리턴한 뷰의 정보가 */* 되면 템플릿을 적용한다. -->
+	<!-- <definition name="*/*" extends="layout"> -->
+	<!-- <put-attribute name="content" -->
+	<!-- value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute> -->
+	<!-- </definition> -->
+
+	<!-- user/* 결과 뷰 -->
+	<definition name="user/*" extends="layout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/user/{1}.jsp"></put-attribute>
+	</definition>
+	<!-- board/* 결과 뷰 -->
+	<definition name="board/*" extends="boardLayout">
+		<put-attribute name="content" value="/WEB-INF/views/board/{1}.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="board/free/*" extends="freeBoardLayout">
+		<put-attribute name="bottom" value="/WEB-INF/views/board/free/{1}.jsp"></put-attribute>
+	</definition>	
+
+</tiles-definitions>
