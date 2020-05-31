@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- url 어떤 요청이 되었을떄 ROLE 체크 할 것인지??? -->
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/admin/main" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/member/main" access="isAuthenticated()"/>
+		<sec:form-login
+			login-page="/loginForm"
+			login-processing-url="/login"
+			username-parameter="id"
+			password-parameter="password"
+			default-target-url="/"
+			authentication-failure-handler-ref="failureHandler"
+		/>
+		<sec:logout 
+			logout-url="/member/logout"
+			invalidate-session="true"
+			delete-cookies="JSESESSIONID"
+			logout-success-url="/"			
+		/>
+	</sec:http>
+
+
+	<!-- 계정에 따른 권한 설정이 필요하다 (DB or in Memory) -->
+	<sec:authentication-manager>
+		<sec:authentication-provider ref="provider">
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>
